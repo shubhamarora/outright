@@ -1,6 +1,14 @@
-export default class User {
+
+import BasePage from './app/core/basepage';
+
+export default class User extends BasePage{
     constructor() {
+        super();
         this.endpoint = "/api/v1/getuser";
+    }
+
+    getClassName() {
+        return "User";
     }
 
     model() {
@@ -18,7 +26,7 @@ export default class User {
                 fieldname: "Full Name",
                 type: "string",
                 computed: function() {
-                    return this.fname + this.lname ;
+                    return this.fname + " " + this.lname ;
                 }
             },
         }

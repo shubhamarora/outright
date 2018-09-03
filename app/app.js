@@ -6,7 +6,10 @@ var $ = require('../external/jquery.min.js');
 window.jQuery = $;
 window.$ = $;
 
-var uObj = new User()
+var uObj = new User();
 var pObj = new Processer(uObj);
 
-$("#app").html(pObj.view());
+
+pObj.list().then(function(data){
+    $("#app").html(data);
+});

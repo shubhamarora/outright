@@ -1,13 +1,28 @@
-export const td = (value) => {
+// default as empty sting to handle blank cell case.
+export const cell = (value="") => {
     return `<td>${value}</td>`
 };
 
-export const tableHeader = (headings) => {
+export const tableHeaderContainer = (data) => {
     return `
-    <Table>
         <tr>
-            ${headings.map(item => td(item)).join(" ")}
+            ${data}
         </tr>
-    </Table>
+    `
+};
+
+export const tableContainer = (data) => {
+    return `
+        <table>
+            ${data}
+        </table>
+    `
+}
+
+export const tableRowContainer = (data) => {
+    return `
+        <tr>
+            ${data}
+        </tr>
     `
 };

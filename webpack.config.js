@@ -1,10 +1,13 @@
 const autoprefixer = require('autoprefixer');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: ['./app/app.scss', './app/app.js'],
   output: {
     filename: 'bundle.js',
   },
+  devtool: false,
   module: {
     rules: [
       {
@@ -37,5 +40,20 @@ module.exports = {
           presets: ['es2015'],
         },
       }],
-  }
+  },
+  // optimization: {
+  //   minimizer: [
+  //     new UglifyJsPlugin({
+  //       sourceMap: true,
+  //       uglifyOptions: {
+  //         keep_classnames: true,
+  //       }
+  //     })
+  //   ]
+  // },
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map'
+    })
+  ]
 };
