@@ -14,12 +14,18 @@ export default class Processor {
         // and make heading for the same.
         for(let key in data) {
             arr.push(
-                cell(data[key].fieldname)
+                this.userclassRef.cell(data[key].fieldname)
             );
         }
-        return tableHeaderContainer(arr.join(" "));
+        return this.userclassRef.tableHeaderContainer(arr.join(" "));
     }
     _constructList(data) {
+        // data should not be empty and it should be an array.
+        if(!data && !Array.isArray(data)) {
+            // return empty table row;
+            // TO-DO: create a no record/data screen and return that.
+            return this.userclassRef.tableRowContainer("");
+        }
         // user model fields.
         let userModelFields = Object.keys(this.userModel);
         let rowHtml = "";
@@ -33,23 +39,23 @@ export default class Processor {
                 if(this.userModel[field].hasOwnProperty("computed")) {
                     try {
                         // call computed function defined in model.
-                        rowHtml += cell(this.userModel[field]["computed"].call(item));
+                        rowHtml += this.userclassRef.cell(this.userModel[field]["computed"].call(item));
                     } catch(error) {
-                        // leave cell blank
-                        rowHtml += cell();
+                        // leave this.userclassRef.cell blank
+                        rowHtml += this.userclassRef.cell();
                         console.error("Error occurred in computing ", field, " property. ERROR: ", error);
                     }
                 } else {
                     // if field is present in response from API
                     if(item[field]) {
-                        rowHtml += cell(item[field]);
+                        rowHtml += this.userclassRef.cell(item[field]);
                     } else {
-                        // leave cell blank
-                        rowHtml += cell();
+                        // leave this.userclassRef.cell blank
+                        rowHtml += this.userclassRef.cell();
                     }
                 }
             });
-            return tableRowContainer(rowHtml);
+            return this.userclassRef.tableRowContainer(rowHtml);
         }).join(" "); // merge
     }
     async _getListData() {

@@ -10,6 +10,6 @@ var uObj = new User();
 var pObj = new Processer(uObj);
 
 
-pObj.list().then(function(data){
+pObj.list().then(function(data) {
     $("#app").html(data);
 });

@@ -1,7 +1,7 @@
 
-import BasePage from './app/core/basepage';
+import BasePage from './src/core/basepage';
 
-export default class User extends BasePage{
+export default class User extends BasePage {
     constructor() {
         super();
         this.endpoint = "/api/v1/getuser";

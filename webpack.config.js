@@ -2,12 +2,15 @@ const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const devMode = process.env.NODE_ENV !== "production";
+
 module.exports = {
-  entry: ['./app/app.scss', './app/app.js'],
+  entry: ['./src/app.scss', './src/app.js'],
   output: {
     filename: 'bundle.js',
   },
   devtool: false,
+  mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
@@ -36,9 +39,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
-          presets: ['es2015'],
-        },
+        exclude: /(node_modules|bower_components|external)/,
       }],
   },
   // optimization: {
